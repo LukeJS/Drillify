@@ -11,7 +11,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 
 import java.util.List;
 
@@ -22,10 +24,9 @@ public class ItemDrill extends ItemPickaxe implements IEnergyContainerItem {
     public int energyPerUse = 500;
 
     public ItemDrill() {
-        super(Item.ToolMaterial.IRON);
+        super(ToolMaterial.IRON);
         setUnlocalizedName(Drillify.PREFIX + "drill");
         setTextureName(Drillify.RESOURCE_PREFIX + "drill");
-        setMaxDamage(100);
         setNoRepair();
     }
 
@@ -52,6 +53,35 @@ public class ItemDrill extends ItemPickaxe implements IEnergyContainerItem {
     }
 
     @Override
+    public void setDamage(ItemStack stack, int damage) {
+        super.setDamage(stack, 0);
+    }
+
+    @Override
+    public int getDisplayDamage(ItemStack stack) {
+        if (stack.stackTagCompound == null) {
+            EnergyHelper.setDefaultEnergyTag(stack, 0);
+        }
+
+        return maxEnergy - stack.stackTagCompound.getInteger("Energy");
+    }
+
+    @Override
+    public int getMaxDamage(ItemStack stack) {
+        return maxEnergy;
+    }
+
+    @Override
+    public boolean showDurabilityBar(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public boolean isDamaged(ItemStack stack) {
+        return true;
+    }
+
+    @Override
     public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving) {
         extractEnergy(stack, energyPerUse, false);
         return true;
@@ -61,15 +91,9 @@ public class ItemDrill extends ItemPickaxe implements IEnergyContainerItem {
     public float getDigSpeed(ItemStack stack, Block block, int meta) {
         if (stack.stackTagCompound.getInteger("Energy") < energyPerUse) {
             return 0.1F;
-        } else {
-            return ToolMaterial.EMERALD.getEfficiencyOnProperMaterial();
         }
-    }
 
-    public int energyToPercentage(int energy) {
-        double modifier = (double) 100 / maxEnergy;
-        int percentage = (int)(100 - (energy * modifier));
-        return percentage;
+        return super.getDigSpeed(stack, block, meta);
     }
 
     @Override
@@ -84,7 +108,7 @@ public class ItemDrill extends ItemPickaxe implements IEnergyContainerItem {
         if (!simulate) {
             energy += energyReceived;
             container.stackTagCompound.setInteger("Energy", energy);
-            container.setItemDamage(energyToPercentage(energy));
+            container.setItemDamage(maxEnergy - energy);
         }
 
         return energyReceived;
@@ -102,7 +126,7 @@ public class ItemDrill extends ItemPickaxe implements IEnergyContainerItem {
         if (!simulate) {
             energy -= energyExtracted;
             container.stackTagCompound.setInteger("Energy", energy);
-            container.setItemDamage(energyToPercentage(energy));
+            container.setItemDamage(maxEnergy - energy);
         }
 
         return energyExtracted;

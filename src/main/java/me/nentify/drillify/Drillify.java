@@ -7,20 +7,16 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import me.nentify.drillify.item.DrillifyItems;
-import me.nentify.drillify.item.ItemDrill;
 import net.minecraft.item.Item;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Drillify.MODID, version = Drillify.VERSION, dependencies = Drillify.DEPENDENCIES)
-public class Drillify
-{
+public class Drillify {
     public static final String MODID = "drillify";
     public static final String VERSION = "0.1-alpha";
     public static final String PREFIX = MODID + ".";
     public static final String RESOURCE_PREFIX = MODID + ":";
     public static final String DEPENDENCIES = "required-after:Forge@[10.13.2.1291,)";
-
-    public static Item drill = new ItemDrill();
 
     public static Logger logger;
 

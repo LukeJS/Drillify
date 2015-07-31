@@ -17,7 +17,7 @@ public class DrillifyItems {
     }
 
     public static void init() {
-        toolDrill = EnergyHelper.setDefaultEnergyTag(new ItemStack(itemDrill, 1, 0), 0);
+        toolDrill = EnergyHelper.setDefaultEnergyTag(new ItemStack(itemDrill), 0);
 
         GameRegistry.registerCustomItemStack("toolDrill", toolDrill);
     }
