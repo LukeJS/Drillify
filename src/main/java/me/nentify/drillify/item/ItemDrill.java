@@ -26,7 +26,7 @@ public class ItemDrill extends ItemPickaxe implements IEnergyContainerItem {
     public ItemDrill() {
         super(ToolMaterial.IRON);
         setUnlocalizedName(Drillify.PREFIX + "drill");
-        setTextureName(Drillify.RESOURCE_PREFIX + "drill");
+        setTextureName(Drillify.RESOURCE_PREFIX + "drill_obsidian");
         setNoRepair();
     }
 
