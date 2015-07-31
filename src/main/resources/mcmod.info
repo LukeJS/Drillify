@@ -1,0 +1,16 @@
+[
+{
+  "modid": "drillify",
+  "name": "Drillify",
+  "description": "Adds RF-powered drills",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Nentify"],
+  "credits": "Nentify",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
