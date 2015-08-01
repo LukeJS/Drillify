@@ -1,40 +1,44 @@
-package me.nentify.drillify.item;
+package me.nentify.drillify.item.drill;
 
 import cofh.api.energy.IEnergyContainerItem;
+import cofh.core.item.tool.ItemToolAdv;
 import cofh.lib.util.helpers.EnergyHelper;
 import cofh.lib.util.helpers.StringHelper;
-import me.nentify.drillify.Drillify;
+import cpw.mods.fml.common.ModClassLoader;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeHooks;
 
 import java.util.List;
 
-public class ItemDrill extends ItemPickaxe implements IEnergyContainerItem {
+public class ItemDrill extends ItemToolAdv implements IEnergyContainerItem {
 
     public int maxEnergy = 15000;
     public int maxTransfer = 1000;
     public int energyPerUse = 500;
 
-    public ItemDrill() {
-        super(ToolMaterial.IRON);
-        setUnlocalizedName(Drillify.PREFIX + "drill");
-        setTextureName(Drillify.RESOURCE_PREFIX + "drill_obsidian");
+    public ItemDrill(ToolMaterial toolMaterial) {
+        super(0, toolMaterial);
         setNoRepair();
-    }
 
-    // TEMP
-    @Override
-    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-        receiveEnergy(stack, 500, false);
-        return stack;
+        addToolClass("pickaxe");
+
+        effectiveBlocks.addAll(ItemPickaxe.field_150915_c);
+        effectiveMaterials.add(Material.iron);
+        effectiveMaterials.add(Material.anvil);
+        effectiveMaterials.add(Material.rock);
+        effectiveMaterials.add(Material.ice);
+        effectiveMaterials.add(Material.packedIce);
+        effectiveMaterials.add(Material.glass);
+        effectiveMaterials.add(Material.redstoneLight);
+
     }
 
     @Override
