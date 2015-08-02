@@ -25,7 +25,7 @@ public class ItemDrill extends ItemToolAdv implements IEnergyContainerItem, IEqu
     public int energyPerUse = 500;
 
     public ItemDrill(ToolMaterial toolMaterial) {
-        super(0, toolMaterial);
+        super(2, toolMaterial);
         setNoRepair();
 
         addToolClass("pickaxe");

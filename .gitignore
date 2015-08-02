@@ -5,9 +5,6 @@ eclipse/
 .gradle/
 .settings/
 bin/
-repo/
-run/
-out/
 *.ipr
 *.iml
 *.iws

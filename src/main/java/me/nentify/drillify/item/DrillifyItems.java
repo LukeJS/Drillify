@@ -2,23 +2,27 @@ package me.nentify.drillify.item;
 
 import cofh.core.item.ItemBase;
 import cofh.lib.util.helpers.EnergyHelper;
+import cofh.lib.util.helpers.ItemHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import me.nentify.drillify.Drillify;
+import me.nentify.drillify.integration.TEItems;
 import me.nentify.drillify.item.drill.ItemDrill;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
 
 import static cofh.lib.util.helpers.ItemHelper.ShapedRecipe;
+import static cofh.lib.util.helpers.ItemHelper.ShapelessRecipe;
 
 public class DrillifyItems {
 
     public static void preInit() {
         itemMaterial = (ItemBase) new ItemBase("drillify").setUnlocalizedName("material").setCreativeTab(Drillify.creativeTab);
 
-        itemDrillIron = new ItemDrill(Item.ToolMaterial.IRON).setUnlocalizedName(Drillify.PREFIX + "drillIron").setTextureName(Drillify.RESOURCE_PREFIX + "drillIron").setCreativeTab(Drillify.creativeTab);
-        itemDrillDiamond = new ItemDrill(Item.ToolMaterial.EMERALD).setUnlocalizedName(Drillify.PREFIX + "drillDiamond").setTextureName(Drillify.RESOURCE_PREFIX + "drillDiamond").setCreativeTab(Drillify.creativeTab);
-        itemDrillObsidian = new ItemDrill(TOOL_MATERIAL_OBSIDIAN).setUnlocalizedName(Drillify.PREFIX + "drillObsidian").setTextureName(Drillify.RESOURCE_PREFIX + "drillObsidian").setCreativeTab(Drillify.creativeTab);
+        itemDrillIron = new ItemDrill(Item.ToolMaterial.IRON).setUnlocalizedName(Drillify.PREFIX + "drillIron").setTextureName(Drillify.RESOURCE_PREFIX + "DrillIron").setCreativeTab(Drillify.creativeTab);
+        itemDrillDiamond = new ItemDrill(Item.ToolMaterial.EMERALD).setUnlocalizedName(Drillify.PREFIX + "drillDiamond").setTextureName(Drillify.RESOURCE_PREFIX + "DrillDiamond").setCreativeTab(Drillify.creativeTab);
+        itemDrillObsidian = new ItemDrill(TOOL_MATERIAL_OBSIDIAN).setUnlocalizedName(Drillify.PREFIX + "drillObsidian").setTextureName(Drillify.RESOURCE_PREFIX + "DrillObsidian").setCreativeTab(Drillify.creativeTab);
 
         GameRegistry.registerItem(itemDrillIron, "drillIron");
         GameRegistry.registerItem(itemDrillDiamond, "drillDiamond");
@@ -26,11 +30,9 @@ public class DrillifyItems {
     }
 
     public static void init() {
-        drillBody = itemMaterial.addItem(0, "drillBody");
-
-        drillHeadIron = itemMaterial.addItem(1, "drillHeadIron");
-        drillHeadDiamond = itemMaterial.addItem(2, "drillHeadDiamond");
-        drillHeadObsidian = itemMaterial.addItem(3, "drillHeadObsidian");
+        drillHeadIron = itemMaterial.addItem(0, "drillHeadIron");
+        drillHeadDiamond = itemMaterial.addItem(1, "drillHeadDiamond");
+        drillHeadObsidian = itemMaterial.addItem(2, "drillHeadObsidian");
 
         toolDrillIron = EnergyHelper.setDefaultEnergyTag(new ItemStack(itemDrillIron), 0);
         toolDrillDiamond = EnergyHelper.setDefaultEnergyTag(new ItemStack(itemDrillDiamond), 0);
@@ -42,9 +44,13 @@ public class DrillifyItems {
     }
 
     public static void postInit() {
-        GameRegistry.addRecipe(ShapedRecipe(toolDrillIron, new Object[] { "   ", " I ", "   ", 'I', "ingotIron" }));
-        GameRegistry.addRecipe(ShapedRecipe(toolDrillDiamond, new Object[] { "   ", " I ", "   ", 'I', "gemDiamond" }));
-        GameRegistry.addRecipe(ShapedRecipe(toolDrillObsidian, new Object[] { "   ", " I ", "   ", 'I', "toolDrillDiamond" }));
+        ItemHelper.addShapedOreRecipe(drillHeadIron, "I  ", " B ", "  B", 'I', "ingotIron", 'B', "blockIron");
+        ItemHelper.addShapedOreRecipe(drillHeadDiamond, "I  ", " B ", "  B", 'I', "gemDiamond", 'B', "blockDiamond");
+        ItemHelper.addShapedOreRecipe(drillHeadObsidian, "O  ", "   ", "   ", 'O', Blocks.obsidian);
+
+        ItemHelper.addShapedOreRecipe(toolDrillIron, "HI ", "ICI", " IR", 'I', "ingotInvar", 'H', drillHeadIron, 'C', TEItems.powerCoilElectrum, 'R', TEItems.capacitorReinforced);
+        ItemHelper.addShapedOreRecipe(toolDrillDiamond, "H ", " D", 'H', drillHeadDiamond, 'D', toolDrillIron);
+        ItemHelper.addShapedOreRecipe(toolDrillObsidian, "H ", " D", 'H', drillHeadObsidian, 'D', toolDrillDiamond);
     }
 
     public static ItemBase itemMaterial;
@@ -52,8 +58,6 @@ public class DrillifyItems {
     public static Item itemDrillIron;
     public static Item itemDrillDiamond;
     public static Item itemDrillObsidian;
-
-    public static ItemStack drillBody;
 
     public static ItemStack drillHeadIron;
     public static ItemStack drillHeadDiamond;
@@ -63,5 +67,5 @@ public class DrillifyItems {
     public static ItemStack toolDrillDiamond;
     public static ItemStack toolDrillObsidian;
 
-    public static final Item.ToolMaterial TOOL_MATERIAL_OBSIDIAN = EnumHelper.addToolMaterial("OBSIDIAN", 3, 100, 10.0F, 0, 25);
-        }
+    public static final Item.ToolMaterial TOOL_MATERIAL_OBSIDIAN = EnumHelper.addToolMaterial("OBSIDIAN", 3, 100, 10.0F, 3, 25);
+}
