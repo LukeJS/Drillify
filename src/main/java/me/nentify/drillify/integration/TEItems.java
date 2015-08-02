@@ -6,11 +6,11 @@ import net.minecraft.item.ItemStack;
 
 public class TEItems {
 
-    public static ItemStack capacitorReinforced = null;
+    public static ItemStack capacitorHardened = null;
     public static ItemStack powerCoilElectrum = null;
 
     public static void init() {
-        capacitorReinforced = GameRegistry.findItemStack("ThermalExpansion", "capacitorReinforced", 1);
+        capacitorHardened = GameRegistry.findItemStack("ThermalExpansion", "capacitorHardened", 1);
         powerCoilElectrum = GameRegistry.findItemStack("ThermalExpansion", "powerCoilElectrum", 1);
     }
 }
