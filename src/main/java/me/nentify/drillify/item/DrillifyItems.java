@@ -4,9 +4,7 @@ import cofh.core.item.ItemBase;
 import cofh.lib.util.helpers.EnergyHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import me.nentify.drillify.Drillify;
-import me.nentify.drillify.item.drill.ItemDrillDiamond;
-import me.nentify.drillify.item.drill.ItemDrillIron;
-import me.nentify.drillify.item.drill.ItemDrillObsidian;
+import me.nentify.drillify.item.drill.ItemDrill;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
@@ -18,9 +16,9 @@ public class DrillifyItems {
     public static void preInit() {
         itemMaterial = (ItemBase) new ItemBase("drillify").setUnlocalizedName("material").setCreativeTab(Drillify.creativeTab);
 
-        itemDrillIron = new ItemDrillIron().setUnlocalizedName(Drillify.PREFIX + "drillIron").setTextureName(Drillify.RESOURCE_PREFIX + "drillIron").setCreativeTab(Drillify.creativeTab);
-        itemDrillDiamond = new ItemDrillDiamond().setUnlocalizedName(Drillify.PREFIX + "drillDiamond").setTextureName(Drillify.RESOURCE_PREFIX + "drillDiamond").setCreativeTab(Drillify.creativeTab);
-        itemDrillObsidian = new ItemDrillObsidian().setUnlocalizedName(Drillify.PREFIX + "drillObsidian").setTextureName(Drillify.RESOURCE_PREFIX + "drillObsidian").setCreativeTab(Drillify.creativeTab);
+        itemDrillIron = new ItemDrill(Item.ToolMaterial.IRON).setUnlocalizedName(Drillify.PREFIX + "drillIron").setTextureName(Drillify.RESOURCE_PREFIX + "drillIron").setCreativeTab(Drillify.creativeTab);
+        itemDrillDiamond = new ItemDrill(Item.ToolMaterial.EMERALD).setUnlocalizedName(Drillify.PREFIX + "drillDiamond").setTextureName(Drillify.RESOURCE_PREFIX + "drillDiamond").setCreativeTab(Drillify.creativeTab);
+        itemDrillObsidian = new ItemDrill(TOOL_MATERIAL_OBSIDIAN).setUnlocalizedName(Drillify.PREFIX + "drillObsidian").setTextureName(Drillify.RESOURCE_PREFIX + "drillObsidian").setCreativeTab(Drillify.creativeTab);
 
         GameRegistry.registerItem(itemDrillIron, "drillIron");
         GameRegistry.registerItem(itemDrillDiamond, "drillDiamond");
