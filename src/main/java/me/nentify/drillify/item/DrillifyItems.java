@@ -46,7 +46,7 @@ public class DrillifyItems {
     public static void postInit() {
         ItemHelper.addShapedOreRecipe(drillHeadIron, "I  ", " B ", "  B", 'I', "ingotIron", 'B', "blockIron");
         ItemHelper.addShapedOreRecipe(drillHeadDiamond, "DD", "DH", 'D', "gemDiamond", 'H', drillHeadIron);
-        ItemHelper.addShapedOreRecipe(drillHeadObsidian, "O  ", "   ", "   ", 'O', Blocks.obsidian);
+        //ItemHelper.addShapedOreRecipe(drillHeadObsidian, "O  ", "   ", "   ", 'O', Blocks.obsidian);
 
         ItemHelper.addShapedOreRecipe(toolDrillIron, "HI ", "IRI", " IC", 'I', "ingotInvar", 'H', drillHeadIron, 'C', 'R', TEItems.capacitorHardened, TEItems.powerCoilElectrum);
         ItemHelper.addShapedOreRecipe(toolDrillDiamond, "H ", " D", 'H', drillHeadDiamond, 'D', toolDrillIron);
