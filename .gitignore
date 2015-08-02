@@ -1,11 +1,7 @@
 build/
 eclipse/
-.classpath
-.project
 .gradle/
-.settings/
-bin/
 *.ipr
 *.iml
 *.iws
-Thumbs.db
+out/
