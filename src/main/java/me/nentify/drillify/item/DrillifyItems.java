@@ -65,5 +65,5 @@ public class DrillifyItems {
     public static ItemStack toolDrillDiamond;
     public static ItemStack toolDrillObsidian;
 
-    public static final Item.ToolMaterial TOOL_MATERIAL_OBSIDIAN = EnumHelper.addToolMaterial("DRILLIFY:OBSIDIAN", 3, 100, 10.0F, 0, 25);
+    public static final Item.ToolMaterial TOOL_MATERIAL_OBSIDIAN = EnumHelper.addToolMaterial("OBSIDIAN", 3, 100, 10.0F, 0, 25);
         }

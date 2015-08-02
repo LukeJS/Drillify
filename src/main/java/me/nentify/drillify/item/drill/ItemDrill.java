@@ -1,6 +1,8 @@
 package me.nentify.drillify.item.drill;
 
 import cofh.api.energy.IEnergyContainerItem;
+import cofh.api.item.IEmpowerableItem;
+import cofh.core.item.IEqualityOverrideItem;
 import cofh.core.item.tool.ItemToolAdv;
 import cofh.lib.util.helpers.EnergyHelper;
 import cofh.lib.util.helpers.StringHelper;
@@ -14,11 +16,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 
 import java.util.List;
 
-public class ItemDrill extends ItemToolAdv implements IEnergyContainerItem {
+public class ItemDrill extends ItemToolAdv implements IEnergyContainerItem, IEqualityOverrideItem {
 
     public int maxEnergy = 15000;
     public int maxTransfer = 1000;
@@ -34,11 +38,6 @@ public class ItemDrill extends ItemToolAdv implements IEnergyContainerItem {
         effectiveMaterials.add(Material.iron);
         effectiveMaterials.add(Material.anvil);
         effectiveMaterials.add(Material.rock);
-        effectiveMaterials.add(Material.ice);
-        effectiveMaterials.add(Material.packedIce);
-        effectiveMaterials.add(Material.glass);
-        effectiveMaterials.add(Material.redstoneLight);
-
     }
 
     @Override
@@ -93,6 +92,10 @@ public class ItemDrill extends ItemToolAdv implements IEnergyContainerItem {
 
     @Override
     public float getDigSpeed(ItemStack stack, Block block, int meta) {
+        if (stack.stackTagCompound == null) {
+            EnergyHelper.setDefaultEnergyTag(stack, 0);
+        }
+
         if (stack.stackTagCompound.getInteger("Energy") < energyPerUse) {
             return 0.1F;
         }
@@ -112,7 +115,6 @@ public class ItemDrill extends ItemToolAdv implements IEnergyContainerItem {
         if (!simulate) {
             energy += energyReceived;
             container.stackTagCompound.setInteger("Energy", energy);
-            container.setItemDamage(maxEnergy - energy);
         }
 
         return energyReceived;
@@ -130,7 +132,6 @@ public class ItemDrill extends ItemToolAdv implements IEnergyContainerItem {
         if (!simulate) {
             energy -= energyExtracted;
             container.stackTagCompound.setInteger("Energy", energy);
-            container.setItemDamage(maxEnergy - energy);
         }
 
         return energyExtracted;
@@ -148,5 +149,27 @@ public class ItemDrill extends ItemToolAdv implements IEnergyContainerItem {
     @Override
     public int getMaxEnergyStored(ItemStack container) {
         return maxEnergy;
+    }
+
+    @Override
+    public boolean isLastHeldItemEqual(ItemStack current, ItemStack previous) {
+        NBTTagCompound a = current.stackTagCompound;
+        NBTTagCompound b = previous.stackTagCompound;
+
+        if (a == b) {
+            return true;
+        }
+
+        if (a == null || b == null) {
+            return false;
+        }
+
+        a = (NBTTagCompound) a.copy();
+        b = (NBTTagCompound) b.copy();
+
+        a.removeTag("Energy");
+        b.removeTag("Energy");
+
+        return a.equals(b);
     }
 }
