@@ -5,6 +5,7 @@ import cofh.core.item.IEqualityOverrideItem;
 import cofh.core.item.tool.ItemToolAdv;
 import cofh.lib.util.helpers.EnergyHelper;
 import cofh.lib.util.helpers.StringHelper;
+import me.nentify.drillify.Config;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -21,9 +22,9 @@ import java.util.List;
 
 public class ItemDrill extends ItemToolAdv implements IEnergyContainerItem, IEqualityOverrideItem {
 
-    public int maxEnergy = 120000;
+    public int maxEnergy = Config.maxEnergy;
     public int maxTransfer = 120;
-    public int energyPerUse = 500;
+    public int energyPerUse = Config.energyPerUse;
 
     public ItemDrill(ToolMaterial toolMaterial) {
         super(0, toolMaterial);

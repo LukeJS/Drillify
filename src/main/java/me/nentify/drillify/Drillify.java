@@ -8,6 +8,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import me.nentify.drillify.integration.TEItems;
 import me.nentify.drillify.item.DrillifyItems;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Drillify.MODID, version = Drillify.VERSION, dependencies = Drillify.DEPENDENCIES)
@@ -25,6 +26,8 @@ public class Drillify {
     public static void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
         logger.info("Starting Drillify");
+
+        Config.preInit(event);
 
         creativeTab = new DrillifyCreativeTab();
 
