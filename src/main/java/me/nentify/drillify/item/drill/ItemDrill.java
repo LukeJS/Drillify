@@ -14,6 +14,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class ItemDrill extends ItemToolAdv implements IEnergyContainerItem, IEqu
     public int energyPerUse = 500;
 
     public ItemDrill(ToolMaterial toolMaterial) {
-        super(2, toolMaterial);
+        super(0, toolMaterial);
         setNoRepair();
 
         addToolClass("pickaxe");
@@ -87,8 +88,23 @@ public class ItemDrill extends ItemToolAdv implements IEnergyContainerItem, IEqu
     }
 
     @Override
+    public boolean hitEntity(ItemStack stack, EntityLivingBase entity, EntityLivingBase player) {
+        EntityPlayer thePlayer = (EntityPlayer) player;
+
+        if (extractEnergy(stack, energyPerUse, false) == energyPerUse) {
+            entity.attackEntityFrom(DamageSource.causePlayerDamage(thePlayer), 2);
+        }
+
+        return true;
+    }
+
+    @Override
     public int getItemEnchantability() {
         return 0;
+    }
+
+    public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+        return false;
     }
 
     @Override
