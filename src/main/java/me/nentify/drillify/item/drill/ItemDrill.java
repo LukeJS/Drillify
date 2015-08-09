@@ -22,9 +22,9 @@ import java.util.List;
 
 public class ItemDrill extends ItemToolAdv implements IEnergyContainerItem, IEqualityOverrideItem {
 
-    public int maxEnergy = Config.maxEnergy;
+    public int maxEnergy = 80000;
     public int maxTransfer = 120;
-    public int energyPerUse = Config.energyPerUse;
+    public int energyPerUse = 500;
 
     public ItemDrill(ToolMaterial toolMaterial) {
         super(0, toolMaterial);
@@ -36,6 +36,9 @@ public class ItemDrill extends ItemToolAdv implements IEnergyContainerItem, IEqu
         effectiveMaterials.add(Material.iron);
         effectiveMaterials.add(Material.anvil);
         effectiveMaterials.add(Material.rock);
+
+        maxEnergy = Config.maxEnergy;
+        energyPerUse = Config.energyPerUse;
     }
 
     @Override
