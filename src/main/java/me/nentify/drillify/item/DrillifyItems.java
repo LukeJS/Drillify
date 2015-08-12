@@ -3,11 +3,14 @@ package me.nentify.drillify.item;
 import cofh.core.item.ItemBase;
 import cofh.lib.util.helpers.EnergyHelper;
 import cofh.lib.util.helpers.ItemHelper;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
+import me.nentify.drillify.Config;
 import me.nentify.drillify.Drillify;
 import me.nentify.drillify.integration.TEItems;
 import me.nentify.drillify.item.drill.ItemDrill;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
@@ -48,7 +51,12 @@ public class DrillifyItems {
         ItemHelper.addShapedOreRecipe(drillHeadDiamond, "DD", "DH", 'D', "gemDiamond", 'H', drillHeadIron);
         //ItemHelper.addShapedOreRecipe(drillHeadObsidian, "O  ", "   ", "   ", 'O', Blocks.obsidian);
 
-        ItemHelper.addShapedOreRecipe(toolDrillIron, "HI ", "ICI", " IR", 'I', "ingotInvar", 'H', drillHeadIron, 'C', TEItems.capacitorHardened, 'R', TEItems.powerCoilElectrum);
+        if (Config.thermalExpansionRecipes == true && Loader.isModLoaded("ThermalExpansion")) {
+            ItemHelper.addShapedOreRecipe(toolDrillIron, "HI ", "ICI", " IR", 'I', "ingotInvar", 'H', drillHeadIron, 'C', TEItems.capacitorHardened, 'R', TEItems.powerCoilElectrum);
+        } else {
+            ItemHelper.addShapedOreRecipe(toolDrillIron, "HI ", "ICI", " IR", 'I', "ingotIron", 'H', drillHeadIron, 'C', Blocks.redstone_block, 'R', Items.gold_ingot);
+        }
+
         ItemHelper.addShapedOreRecipe(toolDrillDiamond, "H ", " D", 'H', drillHeadDiamond, 'D', toolDrillIron);
         ItemHelper.addShapedOreRecipe(toolDrillObsidian, "H ", " D", 'H', drillHeadObsidian, 'D', toolDrillDiamond);
     }

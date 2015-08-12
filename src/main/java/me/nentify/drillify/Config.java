@@ -10,14 +10,18 @@ public class Config {
     public static int maxEnergy;
     public static int energyPerUse;
 
+    public static boolean thermalExpansionRecipes;
+
     public static void preInit(FMLPreInitializationEvent event) {
         config = new Configuration(event.getSuggestedConfigurationFile());
         syncConfig();
     }
 
     public static void syncConfig() {
-        maxEnergy = config.get("Drills", "Energy storage", 80000).getInt();
-        energyPerUse = config.get("Drills", "Energy consumption", 500).getInt();
+        maxEnergy = config.get("drills", "energyStorage", 80000).getInt();
+        energyPerUse = config.get("drills", "energyConsumption", 500).getInt();
+
+        thermalExpansionRecipes = config.get("recipes", "thermalExpansionRecipes", true).getBoolean();
 
         config.save();
     }
