@@ -1,5 +1,6 @@
 package me.nentify.drillify;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -20,7 +21,7 @@ public class Drillify {
     public static final String VERSION = "@VERSION@";
     public static final String PREFIX = MODID + ".";
     public static final String RESOURCE_PREFIX = MODID + ":";
-    public static final String DEPENDENCIES = "required-after:Forge@[10.13.2.1291,);after:ThermalExpansion";
+    public static final String DEPENDENCIES = "required-after:Forge@[10.13.2.1291,);after:ThermalExpansion;after:armourersWorkshop";
     public static final String PROXY_CLIENT_CLASS = "me.nentify.drillify.proxy.ClientProxy";
     public static final String PROXY_COMMNON_CLASS = "me.nentify.drillify.proxy.CommonProxy";
 
@@ -54,6 +55,8 @@ public class Drillify {
     public void postInit(FMLPostInitializationEvent event) {
         DrillifyItems.postInit();
         proxy.postInit();
-        ArmourersCommonManager.instance.postInit();
+        if (Config.armourersWorkshopModels == true && Loader.isModLoaded("armourersWorkshop")) {
+            ArmourersCommonManager.instance.postInit();
+        }
     }
 }

@@ -12,6 +12,8 @@ public class Config {
 
     public static boolean thermalExpansionRecipes;
 
+    public static boolean armourersWorkshopModels;
+
     public static void preInit(FMLPreInitializationEvent event) {
         config = new Configuration(event.getSuggestedConfigurationFile());
         syncConfig();
@@ -22,6 +24,8 @@ public class Config {
         energyPerUse = config.get("drills", "energyConsumption", 500).getInt();
 
         thermalExpansionRecipes = config.get("recipes", "thermalExpansionRecipes", true).getBoolean();
+
+        armourersWorkshopModels = config.get("client", "armourersWorkshopModels", true).getBoolean();
 
         config.save();
     }
