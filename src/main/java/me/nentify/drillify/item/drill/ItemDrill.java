@@ -6,6 +6,7 @@ import cofh.core.item.tool.ItemToolAdv;
 import cofh.lib.util.helpers.EnergyHelper;
 import cofh.lib.util.helpers.StringHelper;
 import me.nentify.drillify.Config;
+import me.nentify.drillify.Drillify;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -19,13 +20,16 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class ItemDrill extends ItemToolAdv implements IEnergyContainerItem, IEqualityOverrideItem {
 
     public int maxEnergy = 80000;
-    public int maxTransfer = 120;
+    public int maxTransfer = 800;
     public int energyPerUse = 500;
+
+    public static HashMap<String, Integer> rotationTimer = new HashMap<String, Integer>();
 
     public ItemDrill(ToolMaterial toolMaterial) {
         super(0, toolMaterial);
@@ -87,11 +91,17 @@ public class ItemDrill extends ItemToolAdv implements IEnergyContainerItem, IEqu
             EnergyHelper.setDefaultEnergyTag(stack, 0);
         }
 
-        if (stack.stackTagCompound.getInteger("Energy") > 0) {
-            return true;
+        if (stack.stackTagCompound.getInteger("Energy") <= 0) {
+            return false;
         }
 
-        return false;
+        if (!rotationTimer.containsKey(entity.getCommandSenderName())) {
+            rotationTimer.put(entity.getCommandSenderName(), 40);
+        } else if (rotationTimer.get(entity.getCommandSenderName()) < 20) {
+            rotationTimer.put(entity.getCommandSenderName(), 20);
+        }
+
+        return true;
     }
 
     @Override
