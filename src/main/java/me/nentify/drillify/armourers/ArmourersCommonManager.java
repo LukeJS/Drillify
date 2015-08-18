@@ -1,6 +1,5 @@
 package me.nentify.drillify.armourers;
 
-import me.nentify.drillify.Drillify;
 import me.nentify.drillify.armourers.skin.DrillSkin;
 import riskyken.armourersWorkshop.api.common.IArmourersCommonManager;
 import riskyken.armourersWorkshop.api.common.skin.ISkinDataHandler;

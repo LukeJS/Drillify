@@ -1,6 +1,5 @@
 package me.nentify.drillify.armourers.skin;
 
-import me.nentify.drillify.Drillify;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;

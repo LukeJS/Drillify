@@ -11,7 +11,7 @@ public class CommonProxy {
     }
 
     public void init() {
-        if (Config.armourersWorkshopModels == true && Loader.isModLoaded("armourersWorkshop")) {
+        if (Config.armourersWorkshopModels && Loader.isModLoaded("armourersWorkshop")) {
             FMLInterModComms.sendMessage("armourersWorkshop", "register", "me.nentify.drillify.armourers.ArmourersCommonManager");
         }
     }

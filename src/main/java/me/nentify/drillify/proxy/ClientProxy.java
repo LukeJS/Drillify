@@ -21,7 +21,7 @@ public class ClientProxy extends CommonProxy {
     public void init() {
         super.init();
 
-        if (Config.armourersWorkshopModels == true && Loader.isModLoaded("armourersWorkshop")) {
+        if (Config.armourersWorkshopModels && Loader.isModLoaded("armourersWorkshop")) {
             FMLInterModComms.sendMessage("armourersWorkshop", "register", "me.nentify.drillify.armourers.ArmourersClientManager");
 
             RenderItemDrill renderer = new RenderItemDrill();

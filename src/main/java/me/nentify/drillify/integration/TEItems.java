@@ -1,7 +1,6 @@
 package me.nentify.drillify.integration;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import me.nentify.drillify.Drillify;
 import net.minecraft.item.ItemStack;
 
 public class TEItems {

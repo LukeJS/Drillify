@@ -15,9 +15,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
 
-import static cofh.lib.util.helpers.ItemHelper.ShapedRecipe;
-import static cofh.lib.util.helpers.ItemHelper.ShapelessRecipe;
-
 public class DrillifyItems {
 
     public static void preInit() {
@@ -51,7 +48,7 @@ public class DrillifyItems {
         ItemHelper.addShapedOreRecipe(drillHeadDiamond, "DD", "DH", 'D', "gemDiamond", 'H', drillHeadIron);
         //ItemHelper.addShapedOreRecipe(drillHeadObsidian, "O  ", "   ", "   ", 'O', Blocks.obsidian);
 
-        if (Config.thermalExpansionRecipes == true && Loader.isModLoaded("ThermalExpansion")) {
+        if (Config.thermalExpansionRecipes && Loader.isModLoaded("ThermalExpansion")) {
             ItemHelper.addShapedOreRecipe(toolDrillIron, "HI ", "ICI", " IR", 'I', "ingotInvar", 'H', drillHeadIron, 'C', TEItems.capacitorHardened, 'R', TEItems.powerCoilElectrum);
         } else {
             ItemHelper.addShapedOreRecipe(toolDrillIron, "HI ", "ICI", " IR", 'I', "ingotIron", 'H', drillHeadIron, 'C', Blocks.redstone_block, 'R', Items.gold_ingot);

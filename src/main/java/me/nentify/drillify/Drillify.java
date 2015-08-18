@@ -13,7 +13,6 @@ import me.nentify.drillify.item.DrillifyItems;
 import me.nentify.drillify.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
 import org.apache.logging.log4j.Logger;
-import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
 
 @Mod(modid = Drillify.MODID, version = Drillify.VERSION, dependencies = Drillify.DEPENDENCIES)
 public class Drillify {
@@ -55,7 +54,7 @@ public class Drillify {
     public void postInit(FMLPostInitializationEvent event) {
         DrillifyItems.postInit();
         proxy.postInit();
-        if (Config.armourersWorkshopModels == true && Loader.isModLoaded("armourersWorkshop")) {
+        if (Config.armourersWorkshopModels && Loader.isModLoaded("armourersWorkshop")) {
             ArmourersCommonManager.instance.postInit();
         }
     }

@@ -6,13 +6,11 @@ import cofh.core.item.tool.ItemToolAdv;
 import cofh.lib.util.helpers.EnergyHelper;
 import cofh.lib.util.helpers.StringHelper;
 import me.nentify.drillify.Config;
-import me.nentify.drillify.Drillify;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
@@ -95,11 +93,7 @@ public class ItemDrill extends ItemToolAdv implements IEnergyContainerItem, IEqu
             return false;
         }
 
-        if (!rotationTimer.containsKey(entity.getCommandSenderName())) {
-            rotationTimer.put(entity.getCommandSenderName(), 40);
-        } else if (rotationTimer.get(entity.getCommandSenderName()) < 20) {
-            rotationTimer.put(entity.getCommandSenderName(), 20);
-        }
+        rotationTimer.put(entity.getCommandSenderName(), 20);
 
         return true;
     }

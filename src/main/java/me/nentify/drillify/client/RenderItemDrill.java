@@ -1,6 +1,5 @@
 package me.nentify.drillify.client;
 
-import me.nentify.drillify.Drillify;
 import me.nentify.drillify.armourers.ArmourersClientManager;
 import me.nentify.drillify.armourers.ArmourersCommonManager;
 import me.nentify.drillify.item.DrillifyItems;
@@ -10,7 +9,6 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.lwjgl.opengl.GL11;
 import riskyken.armourersWorkshop.api.client.render.ISkinRenderHandler;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinPointer;
@@ -100,11 +98,11 @@ public class RenderItemDrill implements IItemRenderer {
         //TODO Replace test render.
         renderer.renderSkinPart(sp, st.getSkinParts().get(0));
         GL11.glPushMatrix();
-        float rotation = (float)((double)System.currentTimeMillis() / 3 % 360);
+        float rotation = (float)((double)(System.currentTimeMillis() * 2) / 3 % 360) * -1;
 
         GL11.glTranslated(0, 0, -8 * scale);
 
-        if (type == ItemRenderType.EQUIPPED_FIRST_PERSON) {
+        if (type == ItemRenderType.EQUIPPED_FIRST_PERSON || type == ItemRenderType.EQUIPPED) {
             EntityLivingBase player = (EntityLivingBase) data[1];
 
             if (ItemDrill.rotationTimer.containsKey(player.getCommandSenderName())) {
