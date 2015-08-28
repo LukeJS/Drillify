@@ -75,6 +75,6 @@ public class DrillSkin implements ISkinType {
 
     @Override
     public boolean isHidden() {
-        return false;
+        return true;
     }
 }

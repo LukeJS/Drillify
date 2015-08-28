@@ -7,3 +7,7 @@ item.drillify.material.drillHeadObsidian.name=Obsidian Drill Head
 item.drillify.drillIron.name=Iron Drill
 item.drillify.drillDiamond.name=Diamond Drill
 item.drillify.drillObsidian.name=Obsidian Drill
+
+skinType.drillify:drill.name=Drill
+skinPartType.drillify:drill.base.name=Base
+skinPartType.drillify:drill.head.name=Head

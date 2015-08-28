@@ -7,12 +7,19 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import me.nentify.drillify.armourers.ArmourersCommonManager;
 import me.nentify.drillify.integration.TEItems;
 import me.nentify.drillify.item.DrillifyItems;
 import me.nentify.drillify.proxy.CommonProxy;
+import net.minecraft.command.ICommand;
+import net.minecraft.command.ICommandSender;
 import net.minecraft.creativetab.CreativeTabs;
 import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Mod(modid = Drillify.MODID, version = Drillify.VERSION, dependencies = Drillify.DEPENDENCIES)
 public class Drillify {
@@ -53,9 +60,16 @@ public class Drillify {
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         DrillifyItems.postInit();
-        proxy.postInit();
         if (Config.armourersWorkshopModels && Loader.isModLoaded("armourersWorkshop")) {
             ArmourersCommonManager.instance.postInit();
+        }
+        proxy.postInit();
+    }
+
+    @EventHandler
+    public void serverStarting(FMLServerStartingEvent event) {
+        if (Config.armourersWorkshopModels && Loader.isModLoaded("armourersWorkshop")) {
+            ArmourersCommonManager.instance.serverStarting();
         }
     }
 }

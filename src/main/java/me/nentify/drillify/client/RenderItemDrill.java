@@ -6,8 +6,13 @@ import me.nentify.drillify.item.DrillifyItems;
 import me.nentify.drillify.item.drill.ItemDrill;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 import riskyken.armourersWorkshop.api.client.render.ISkinRenderHandler;
@@ -15,6 +20,12 @@ import riskyken.armourersWorkshop.api.common.skin.data.ISkinPointer;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
 
 public class RenderItemDrill implements IItemRenderer {
+
+    public RenderItem renderItem;
+
+    public RenderItemDrill() {
+        renderItem = (RenderItem) RenderManager.instance.entityRenderMap.get(EntityItem.class);
+    }
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -98,7 +109,6 @@ public class RenderItemDrill implements IItemRenderer {
         //TODO Replace test render.
         renderer.renderSkinPart(sp, st.getSkinParts().get(0));
         GL11.glPushMatrix();
-        float rotation = (float)((double)(System.currentTimeMillis() * 2) / 3 % 360) * -1;
 
         GL11.glTranslated(0, 0, -8 * scale);
 
@@ -106,6 +116,7 @@ public class RenderItemDrill implements IItemRenderer {
             EntityLivingBase player = (EntityLivingBase) data[1];
 
             if (ItemDrill.rotationTimer.containsKey(player.getCommandSenderName())) {
+                float rotation = (float)((double)(System.currentTimeMillis() * 2) / 3 % 360) * -1;
                 GL11.glRotatef(rotation, 0, 0, 1);
 
                 Integer time = ItemDrill.rotationTimer.get(player.getCommandSenderName());

@@ -1,6 +1,11 @@
 package me.nentify.drillify.armourers;
 
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.relauncher.Side;
+import me.nentify.drillify.Drillify;
 import me.nentify.drillify.armourers.skin.DrillSkin;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import riskyken.armourersWorkshop.api.common.IArmourersCommonManager;
 import riskyken.armourersWorkshop.api.common.skin.ISkinDataHandler;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinPointer;
@@ -38,8 +43,15 @@ public class ArmourersCommonManager implements IArmourersCommonManager {
     public void postInit() {
         drillSkin = new DrillSkin();
         skinTypeRegistry.registerSkin(drillSkin);
+    }
 
-        // TODO Move this into a server side world load event.
+    public void serverStarting() {
+        loadSkin("Drill Iron.armour");
+        loadSkin("Drill Diamond.armour");
+        loadSkin("Drill Obsidian.armour");
+    }
+
+    public void clientPostInit() {
         drillSkinIron = loadSkin("Drill Iron.armour");
         drillSkinDiamond = loadSkin("Drill Diamond.armour");
         drillSkinObsidian = loadSkin("Drill Obsidian.armour");

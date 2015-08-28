@@ -5,6 +5,8 @@ import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import me.nentify.drillify.Config;
+import me.nentify.drillify.Drillify;
+import me.nentify.drillify.armourers.ArmourersCommonManager;
 import me.nentify.drillify.client.RenderItemDrill;
 import me.nentify.drillify.item.DrillifyItems;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -34,5 +36,9 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void postInit() {
         super.postInit();
+
+        if (Config.armourersWorkshopModels && Loader.isModLoaded("armourersWorkshop")) {
+            ArmourersCommonManager.instance.clientPostInit();
+        }
     }
 }
